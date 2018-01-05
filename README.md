@@ -3,8 +3,7 @@
 [![](https://gaforgithub.azurewebsites.net/api?repo=gaforgithub)](https://github.com/dgkanatsios/gaforgithub)
 
 # gaforgithub
-Google Analytics for GitHub repositories using Azure Functions
-
+This is an unofficial Google Analytics for GitHub repositories tracking using [Azure Functions](https://functions.azure.com)
 
 ## Instructions
 
