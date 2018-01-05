@@ -32,6 +32,7 @@ module.exports = function (context, req) {
         cid: uuidv4(),
         t: 'pageview',
         dp: repo,
+        dr: encodeURIComponent(req.headers['referer']),
         uip: req.headers['x-forwarded-for'], //IP
         ua: req.headers['user-agent'] //user agent
       },
