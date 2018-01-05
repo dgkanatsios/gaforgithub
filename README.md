@@ -20,7 +20,7 @@ Google Analytics for GitHub repositories using Azure Functions
 First, change `YYYYYY` to your Azure Function's URL. Then, change `XXXXXXXX` to a distinctive name to use in order to track this specific page. Might be the name of your repo or whatever you like. If you want to display a button use this code:
 
 ```markdown
-[![](https://YYYYYY.azurewebsites.net/api?repo=XXXXXXXX)](https://github.com/dgkanatsios/gaforgithub)
+[![unofficial Google Analytics for GitHub](https://YYYYYY.azurewebsites.net/api?repo=XXXXXXXX)](https://github.com/dgkanatsios/gaforgithub)
 ```
 
 If you do not want to display the button, use this code:
