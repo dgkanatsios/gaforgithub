@@ -20,8 +20,6 @@ module.exports = function (context, req) {
 
   if (req.query.repo) {
 
-    const ip = req.headers['x-forwarded-for'];
-
     const repo = req.query.repo;
 
     request({
@@ -34,7 +32,8 @@ module.exports = function (context, req) {
         cid: uuidv4(),
         t: 'pageview',
         dp: repo,
-        uip: ip
+        uip: req.headers['x-forwarded-for'], //IP
+        ua: req.headers['user-agent'] //user agent
       },
       // The below parameters are specific to request-retry
       maxAttempts: 5, // (default) try 5 times
@@ -50,7 +49,7 @@ module.exports = function (context, req) {
           context.res = {
             status: 200,
             headers: {
-              'Content-Type': 'image/svg+xml'
+              'Content-Type': 'image/svg+xml' //SVG tutorial: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started
             },
             isRaw: true,
             body: data
@@ -69,4 +68,6 @@ module.exports = function (context, req) {
 
 };
 
-//Azure Functions v2 will send output directly to
+//Azure Functions v2 will send output directly to response
+//https://stackoverflow.com/questions/47614788/how-to-return-base64-image-from-azure-function-as-binary-data?rq=1
+//more: https://stackoverflow.com/questions/43810082/azure-functions-nodejs-response-body-as-a-stream/43811778

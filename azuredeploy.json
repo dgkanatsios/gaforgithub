@@ -5,7 +5,7 @@
         "gaTrackingID": {
             "type": "string",
             "metadata": {
-                "description": "Your Google Analytics Tracking ID. Should be in the format UA-XXXX-Y."
+                "description": "Your Google Analytics Tracking ID. Should be in the format 'UA-XXXX-Y'."
             }
         },
         "appName": {
@@ -17,7 +17,7 @@
         "hostingPlanName": {
             "type": "string",
             "metadata": {
-                "description": "The name of the App Service plan that you wish to create. Pick a distinctive name like 'leaderboardsplan'."
+                "description": "The name of the App Service plan that you wish to create. Pick a distinctive name like 'gaforgithubplan'."
             }
         },
         "storageAccountType": {
