@@ -1,10 +1,5 @@
-//https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide
-//https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
-//https://img.shields.io/badge/googleanalytics-github-green.svg
-
 require('dotenv').config();
 const request = require('requestretry');
-const stream = require('stream');
 const fs = require('fs');
 
 function uuidv4() {
@@ -32,8 +27,11 @@ module.exports = function (context, req) {
         cid: uuidv4(),
         t: 'pageview',
         dp: repo,
-        dr: encodeURIComponent(req.headers['referer']),
-        uip: req.headers['x-forwarded-for'], //IP
+        //GitHub currently uses Camo, so all the below details are hidden unfortunately
+        //listed here in case you want to use this in an environment other than GitHub
+        //https://help.github.com/articles/about-anonymized-image-urls/
+        dr: encodeURIComponent(req.headers['referer']), //referer
+        uip: req.headers['x-forwarded-for'], //user's IP
         ua: req.headers['user-agent'] //user agent
       },
       // The below parameters are specific to request-retry
@@ -50,7 +48,8 @@ module.exports = function (context, req) {
           context.res = {
             status: 200,
             headers: {
-              'Content-Type': 'image/svg+xml' //SVG tutorial: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started
+              'Content-Type': 'image/svg+xml', //SVG tutorial: https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Getting_Started
+              'Cache-Control': 'private, no-store'
             },
             isRaw: true,
             body: data
@@ -68,6 +67,12 @@ module.exports = function (context, req) {
   }
 
 };
+
+//GA documentation links and more
+//https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide
+//https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
+//https://img.shields.io/badge/googleanalytics-github-green.svg
+
 
 //Azure Functions v2 will send output directly to response
 //https://stackoverflow.com/questions/47614788/how-to-return-base64-image-from-azure-function-as-binary-data?rq=1
