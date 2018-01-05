@@ -46,7 +46,7 @@ module.exports = function (context, req) {
 
 
         const filename = req.query.empty === '' ? 'empty' : 'gag-green';
-        fs.readFile(`gaforgithub/${filename}.svg`, 'utf-8', function (err, data) {
+        fs.readFile(require('path').resolve(__dirname, `${filename}.svg`), 'utf-8', function (err, data) {
           context.res = {
             status: 200,
             headers: {
