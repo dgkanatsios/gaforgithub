@@ -126,8 +126,8 @@
                             "value": "production"
                         },
                         {
-                            "name": "MONGODB_CONNECTION_STRING",
-                            "value": "parameters('gaTrackingID')"
+                            "name": "PROPERTY_ID",
+                            "value": "[parameters('gaTrackingID')]"
                         },
                         {
                             "name":"APPINSIGHTS_INSTRUMENTATIONKEY",
