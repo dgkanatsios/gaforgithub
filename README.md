@@ -2,8 +2,11 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![](https://gaforgithub.azurewebsites.net/api?repo=gaforgithub)](https://github.com/dgkanatsios/gaforgithub)
 
-# gaforgithub
-This is an unofficial Google Analytics for GitHub repositories tracking using [Azure Functions](https://functions.azure.com)
+# Unofficial Google Analytics tracking for GitHub projects
+This is an unofficial Google Analytics for GitHub repositories tracking using [Azure Functions](https://functions.azure.com) and written in Node.js. You can use this to track pageviews in all pages that contain Markdown, like READMEs, wikis etc.
+
+#### Attention
+GitHub uses camo to cache and serve images ([details](https://help.github.com/articles/about-anonymized-image-urls/)), so tracking may not be accurate and user details are hidden (IP, referer, etc.). That is the reason we are not setting any cookies on the request. However, this may be sufficient for some users.
 
 ## Instructions
 
@@ -27,3 +30,11 @@ If you do not want to display the button, use this code:
 ```markdown
 ![](https://YYYYYY.azurewebsites.net/api?repo=XXXXXXXX&empty)
 ```
+
+## Cost
+
+The deployment uses Azure Functions' [Consumption Plan](https://docs.microsoft.com/en-us/azure/azure-functions/functions-scale#consumption-plan) so you'll see that it's really cheap to host it for your projects.
+
+## Inspiration
+
+Inspired by igrorik's solution [here](https://github.com/igrigorik/ga-beacon) that works with Go language and Google App Engine.
