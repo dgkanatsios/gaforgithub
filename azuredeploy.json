@@ -2,16 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "gaTrackingID": {
+            "type": "string",
+            "metadata": {
+                "description": "Your Google Analytics Tracking ID. Should be in the format UA-XXXX-Y."
+            }
+        },
         "appName": {
             "type": "string",
             "metadata": {
                 "description": "The name of the function app that you wish to create. Needs to be globally unique, this will determine your Function's DNS."
-            }
-        },
-        "databaseAccountName": {
-            "type": "string",
-            "metadata": {
-                "description": "The CosmosDB database account name (server name). Needs to be globally unique."
             }
         },
         "hostingPlanName": {
@@ -34,7 +34,7 @@
         },
         "repoURL": {
             "type": "string",
-            "defaultValue": "https://github.com/dgkanatsios/AzureFunctionsNodeLeaderboards-Cosmos",
+            "defaultValue": "https://github.com/dgkanatsios/gaforgithub",
             "metadata": {
                 "description": "The URL for the GitHub repository that contains the project to deploy."
             }
@@ -60,17 +60,6 @@
             "location": "South Central US",
             "properties": {
                 "ApplicationId": "[variables('functionAppName')]"
-            }
-        },
-        {
-            "apiVersion": "2015-04-08",
-            "type": "Microsoft.DocumentDB/databaseAccounts",
-            "kind": "MongoDB",
-            "name": "[parameters('databaseAccountName')]",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "databaseAccountOfferType": "Standard",
-                "name": "[parameters('databaseAccountName')]"
             }
         },
         {
@@ -103,7 +92,6 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('databaseAccountName'))]",
                 "[resourceId('microsoft.insights/components/', variables('functionAppName'))]"
             ],
             "properties": {
@@ -139,7 +127,7 @@
                         },
                         {
                             "name": "MONGODB_CONNECTION_STRING",
-                            "value": "[listConnectionStrings(resourceId('Microsoft.DocumentDb/databaseAccounts', parameters('databaseAccountName')), '2015-11-06').connectionStrings[0].connectionString]"
+                            "value": "parameters('gaTrackingID')"
                         },
                         {
                             "name":"APPINSIGHTS_INSTRUMENTATIONKEY",
@@ -147,7 +135,7 @@
                         },
                         {
                             "name": "Project",
-                            "value": "leaderboardsFunctionApp"
+                            "value": "gaforgithub"
                         }
                     ]
                 }

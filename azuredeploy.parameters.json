@@ -5,7 +5,7 @@
       "appName": {
         "value": "GEN-UNIQUE"
       },
-      "databaseAccountName": {
+      "gaTrackingID": {
         "value": "GEN-UNIQUE"
       },
       "hostingPlanName": {
