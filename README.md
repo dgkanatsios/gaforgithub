@@ -5,8 +5,11 @@
 # Unofficial Google Analytics tracking for GitHub projects
 This is an unofficial Google Analytics for GitHub repositories tracking using [Azure Functions](https://functions.azure.com) and written in Node.js. You can use this to track pageviews in all pages that contain Markdown, like READMEs, wikis etc.
 
+## Motivation
+GitHub has a mechanism by which you can see tracking information about your repositories, you can read about it [here](https://help.github.com/articles/viewing-traffic-to-a-repository/). However, it hosts data only for the last 14 days and there is no real time information.
+
 #### Attention
-GitHub uses camo to cache and serve images ([details](https://help.github.com/articles/about-anonymized-image-urls/)), so tracking may not be accurate and user details are hidden (IP, referer, etc.). That is the reason we are not setting any cookies on the request. However, this may be sufficient for some users.
+GitHub uses camo to cache and serve images ([details](https://help.github.com/articles/about-anonymized-image-urls/)), so (a) tracking may not be accurate and (b) user details are hidden (IP, referer, etc.). 
 
 ## Instructions
 
