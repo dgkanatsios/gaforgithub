@@ -22,11 +22,12 @@ module.exports = function (context, req) {
 
 
   } else {
+    const msg = "Please pass a repo on the query string";
     context.res = {
       status: 400,
-      body: "Please pass a repo on the query string"
+      body: msg
     };
-    context.done();
+    context.done(msg);
   }
 };
 
