@@ -2,8 +2,6 @@ require('dotenv').config();
 const request = require('requestretry');
 const fs = require('fs');
 
-
-
 module.exports = function (context, req) {
   context.log('JavaScript HTTP trigger function processed a request.');
 
@@ -22,17 +20,18 @@ module.exports = function (context, req) {
 
 
   } else {
-    const msg = "Please pass a repo on the query string";
     context.res = {
       status: 400,
-      body: msg
+      body: "Please pass a repo on the query string"
     };
-    context.done(msg);
+    context.done();
   }
 };
 
 function trackVisit(context, req, cid, cookies) {
   const repo = req.query.repo;
+  
+  const ip = req.headers['x-forwarded-for'].split(":")[0];
 
   request({
     url: 'https://www.google-analytics.com/collect',
@@ -48,7 +47,7 @@ function trackVisit(context, req, cid, cookies) {
       //listed here in case you want to use this in an environment other than GitHub
       //https://help.github.com/articles/about-anonymized-image-urls/
       dr: encodeURIComponent(req.headers['referer']), //referer
-      uip: req.headers['x-forwarded-for'], //user's IP
+      uip: ip, //user's IP
       ua: req.headers['user-agent'] //user agent
     },
     // The below parameters are specific to request-retry
