@@ -6,9 +6,9 @@ module.exports = function (context, req) {
   context.log('JavaScript HTTP trigger function processed a request.');
 
   if (req.query.repo) {
-    
+
     const cookies = parseCookies(req.headers.cookie);
-        
+
     //see if there is a cookie with name GAGH
     if ('GAGH' in cookies) {
       sendResponse(context, req, cookies);
@@ -30,8 +30,10 @@ module.exports = function (context, req) {
 
 function trackVisit(context, req, cid, cookies) {
   const repo = req.query.repo;
-  
-  const ip = req.headers['x-forwarded-for'].split(":")[0];
+  let ip = "";
+  if (req.headers["x-forwarded-for"]) {
+    ip = req.headers["x-forwarded-for"].split(":")[0];
+  }
 
   request({
     url: 'https://www.google-analytics.com/collect',
